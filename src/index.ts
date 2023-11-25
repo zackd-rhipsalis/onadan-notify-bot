@@ -33,4 +33,4 @@ const eventsub = async () => {
   }));
 }
 
-eventsub();
+eventsub().catch(console.log);
