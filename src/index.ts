@@ -14,8 +14,8 @@ const eventsub = async () => {
 
   const listener = new EventSubHttpListener({ adapter, apiClient, secret: useEnv('hmacSecret') });
 
-  listener.onSubscriptionCreateSuccess(async () => console.log(`サブスクリプション成功`));
-  listener.onSubscriptionCreateFailure(async () => console.log(`サブスクリプション失敗`));
+  listener.onSubscriptionCreateSuccess(() => console.log(`サブスクリプション成功`));
+  listener.onSubscriptionCreateFailure(() => console.log(`サブスクリプション失敗`));
 
   listener.onStreamOnline(useEnv('onadanId'), e => {
     console.log(`${e.broadcasterDisplayName}がオンラインになりました。`);
