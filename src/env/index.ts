@@ -1,4 +1,4 @@
-import { assertIsDefined, type Envs } from '../types';
+import { assertIsDefined, type Envs } from '../types/index.ts';
 
 const env = (key: string) => process.env[key];
 

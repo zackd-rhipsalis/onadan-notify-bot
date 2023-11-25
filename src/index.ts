@@ -3,8 +3,8 @@ import os from 'os';
 import { DirectConnectionAdapter, EventSubHttpListener } from '@twurple/eventsub-http';
 import { AppTokenAuthProvider } from '@twurple/auth';
 import { ApiClient } from '@twurple/api';
-import { notify } from './notify';
-import { useEnv } from './env';
+import { notify } from './notify.ts';
+import { useEnv } from './env/index.ts';
 
 const sslKey = fs.readFileSync(useEnv('pemKey')).toString();
 const sslCert = fs.readFileSync(useEnv('pemChain')).toString();

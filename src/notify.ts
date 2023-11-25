@@ -1,4 +1,4 @@
-import { useEnv } from './env';
+import { useEnv } from './env/index.ts';
 import { messagingApi, type HTTPError } from '@line/bot-sdk';
 
 export const notify = (text: string) => {

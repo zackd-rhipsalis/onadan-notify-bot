@@ -1,2 +1,2 @@
-export { assertIsDefined } from './assertIsDefined';
-export type { Envs } from './envs.type';
+export { assertIsDefined } from './assertIsDefined.ts';
+export type { Envs } from './envs.type.ts';
