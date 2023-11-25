@@ -24,11 +24,11 @@ const eventsub = async () => {
 
   listener.start();
 
-  ['SIGINT', 'SIGHUP', 'SIGTERM'].forEach(e => process.on(e, async () => {
+  process.on('SIGINT', async () => {
     await apiClient.eventSub.deleteAllSubscriptions();
     listener.stop();
     process.exit(0);
-  }));
+  });
 }
 
 eventsub();
