@@ -5,6 +5,4 @@ export type Envs = {
   uuid?: string;
   channelAccessToken?: string;
   hmacSecret?: string;
-  pemKey?: string;
-  pemChain?: string;
 }

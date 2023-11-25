@@ -1,22 +1,12 @@
-import fs from 'fs';
 import os from 'os';
-import { DirectConnectionAdapter, EventSubHttpListener } from '@twurple/eventsub-http';
+import { EnvPortAdapter, EventSubHttpListener } from '@twurple/eventsub-http';
 import { AppTokenAuthProvider } from '@twurple/auth';
 import { ApiClient } from '@twurple/api';
 import { notify } from './notify.ts';
 import { useEnv } from './env/index.ts';
 
-const sslKey = fs.readFileSync(useEnv('pemKey')).toString();
-const sslCert = fs.readFileSync(useEnv('pemChain')).toString();
-
 const eventsub = async () => {
-  const adapter = new DirectConnectionAdapter({
-    hostName: os.hostname(),
-    sslCert: {
-      key: sslKey,
-      cert: sslCert
-    }
-  });
+  const adapter = new EnvPortAdapter({ hostName: os.hostname() });
   const authProvider = new AppTokenAuthProvider(useEnv('clientId'), useEnv('clientSecret'));
   const apiClient = new ApiClient({ authProvider });
 

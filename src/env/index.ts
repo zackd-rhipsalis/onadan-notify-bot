@@ -8,9 +8,7 @@ const envs: Envs = {
   onadanId: env('ONADAN_USER_ID'),
   uuid: env('LINE_USER_ID'),
   channelAccessToken: env('LINE_CHANNEL_ACCESS_TOKEN'),
-  hmacSecret: env('HMAC_SECRET'),
-  pemKey: env('PEM_KEY'),
-  pemChain: env('PEM_CHAIN')
+  hmacSecret: env('HMAC_SECRET')
 }
 
 export const useEnv = (key: keyof Envs): string => {
