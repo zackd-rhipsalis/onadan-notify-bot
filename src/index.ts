@@ -1,9 +1,12 @@
+import https from 'https';
 import { EventSubHttpListener } from '@twurple/eventsub-http';
 import { NgrokAdapter } from '@twurple/eventsub-ngrok';
 import { AppTokenAuthProvider } from '@twurple/auth';
 import { ApiClient } from '@twurple/api';
 import { notify } from './notify.ts';
 import { useEnv } from './env/index.ts';
+
+const PORT = process.env.PORT || 8080;
 
 const eventsub = async () => {
   const adapter = new NgrokAdapter();
@@ -31,4 +34,10 @@ const eventsub = async () => {
   });
 }
 
-eventsub();
+const server = https.createServer((_, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.write('compulsory listen');
+  res.end();
+});
+
+server.listen(PORT, eventsub);
