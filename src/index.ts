@@ -9,4 +9,4 @@ const server = https.createServer((_, res) => {
   res.end();
 });
 
-server.listen(PORT, () => eventsub());
+server.listen(PORT, eventsub);
