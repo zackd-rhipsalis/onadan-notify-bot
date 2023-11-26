@@ -7,6 +7,9 @@ import { useEnv } from './env/index.ts';
 
 export const eventsub = async () => {
   const adapter = new NgrokAdapter();
+
+  console.log(`listening on ${await adapter.getHostName()}/${adapter.pathPrefix}:${adapter.listenerPort}`);
+
   const authProvider = new AppTokenAuthProvider(useEnv('clientId'), useEnv('clientSecret'));
   const apiClient = new ApiClient({ authProvider });
 
