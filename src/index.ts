@@ -1,12 +1,12 @@
-import os from 'os';
-import { EnvPortAdapter, EventSubHttpListener } from '@twurple/eventsub-http';
+import { EventSubHttpListener } from '@twurple/eventsub-http';
+import { NgrokAdapter } from '@twurple/eventsub-ngrok';
 import { AppTokenAuthProvider } from '@twurple/auth';
 import { ApiClient } from '@twurple/api';
 import { notify } from './notify.ts';
 import { useEnv } from './env/index.ts';
 
 const eventsub = async () => {
-  const adapter = new EnvPortAdapter({ hostName: os.hostname() });
+  const adapter = new NgrokAdapter();
   const authProvider = new AppTokenAuthProvider(useEnv('clientId'), useEnv('clientSecret'));
   const apiClient = new ApiClient({ authProvider });
 
