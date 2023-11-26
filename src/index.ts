@@ -1,11 +1,11 @@
-import https from 'https';
+import http from 'http';
 import { eventsub } from './eventsub.ts';
 
-const PORT = process.env.PORT || 8080;
+const PORT = Number(process.env.PORT) || 8080;
 
-const server = https.createServer((_, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.write('compulsory listen');
+const server = http.createServer((_, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/html' });
+  res.write('<p>compulsory listen</p>');
   res.end();
 });
 
