@@ -1,12 +1,14 @@
-import http from 'http';
+// import http from 'http';
 import { eventsub } from './eventsub.ts';
 
-const PORT = Number(process.env.PORT) || 8080;
+eventsub();
 
-const server = http.createServer((_, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/html' });
-  res.write('<p>compulsory listen</p>');
-  res.end();
-});
+// const PORT = Number(process.env.PORT) || 8080;
 
-server.listen(PORT, eventsub);
+// const server = http.createServer((_, res) => {
+//   res.writeHead(200, { 'Content-Type': 'text/html' });
+//   res.write('<p>compulsory listen</p>');
+//   res.end();
+// });
+
+// server.listen(PORT, eventsub);
