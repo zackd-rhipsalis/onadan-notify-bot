@@ -1,15 +1,11 @@
-import { hostname } from 'os';
 import { EnvPortAdapter, EventSubHttpListener } from '@twurple/eventsub-http';
-// import { NgrokAdapter } from '@twurple/eventsub-ngrok';
 import { AppTokenAuthProvider } from '@twurple/auth';
 import { ApiClient } from '@twurple/api';
 import { notify } from './notify.ts';
 import { useEnv } from './env/index.ts';
 
 export const eventsub = async () => {
-  // const adapter = new NgrokAdapter();
-  console.log(hostname());
-  const adapter = new EnvPortAdapter({ hostName: hostname() });
+  const adapter = new EnvPortAdapter({ hostName: useEnv('hostName') });
   const authProvider = new AppTokenAuthProvider(useEnv('clientId'), useEnv('clientSecret'));
   const apiClient = new ApiClient({ authProvider });
 
@@ -18,7 +14,7 @@ export const eventsub = async () => {
   const listener = new EventSubHttpListener({ adapter, apiClient, secret: useEnv('hmacSecret') });
 
   listener.onSubscriptionCreateSuccess(async (e) => {
-    console.log(`サブスクリプション成功\n CLIコマンド: ${await e.getCliTestCommand()}`);
+    console.log(`サブスクリプション成功\n CLIテストコマンド: ${await e.getCliTestCommand()}`);
   });
   listener.onSubscriptionCreateFailure(() => console.log(`サブスクリプション失敗`));
 
