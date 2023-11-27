@@ -7,9 +7,6 @@ import { useEnv } from './env/index.ts';
 
 export const eventsub = async () => {
   const adapter = new NgrokAdapter();
-
-  console.log(`listening on ${await adapter.getHostName()}:${adapter.listenerPort}`);
-
   const authProvider = new AppTokenAuthProvider(useEnv('clientId'), useEnv('clientSecret'));
   const apiClient = new ApiClient({ authProvider });
 
@@ -17,7 +14,9 @@ export const eventsub = async () => {
 
   const listener = new EventSubHttpListener({ adapter, apiClient, secret: useEnv('hmacSecret') });
 
-  listener.onSubscriptionCreateSuccess(async (e) => console.log(`サブスクリプション成功\n CLIコマンド: ${await e.getCliTestCommand()}`));
+  listener.onSubscriptionCreateSuccess(async (e) => {
+    console.log(`サブスクリプション成功\n CLIコマンド: ${await e.getCliTestCommand()}`);
+  });
   listener.onSubscriptionCreateFailure(() => console.log(`サブスクリプション失敗`));
 
   listener.onStreamOnline(useEnv('onadanId'), e => {
