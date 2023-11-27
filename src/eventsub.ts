@@ -17,7 +17,7 @@ export const eventsub = async () => {
 
   const listener = new EventSubHttpListener({ adapter, apiClient, secret: useEnv('hmacSecret') });
 
-  listener.onSubscriptionCreateSuccess(() => console.log(`サブスクリプション成功`));
+  listener.onSubscriptionCreateSuccess(async (e) => console.log(`サブスクリプション成功\n CLIコマンド: ${await e.getCliTestCommand()}`));
   listener.onSubscriptionCreateFailure(() => console.log(`サブスクリプション失敗`));
 
   listener.onStreamOnline(useEnv('onadanId'), e => {
