@@ -3,14 +3,12 @@ import { AppTokenAuthProvider } from '@twurple/auth';
 import { ApiClient } from '@twurple/api';
 import { notify } from './notify.ts';
 import { useEnv } from './env/index.ts';
-// import { getStream } from './getStream.ts';
 
 export const eventsub = async () => {
   const adapter = new EnvPortAdapter({ hostName: useEnv('hostName') });
   const authProvider = new AppTokenAuthProvider(useEnv('clientId'), useEnv('clientSecret'));
   const apiClient = new ApiClient({ authProvider });
 
-  // await getStream(apiClient);
   await apiClient.eventSub.deleteAllSubscriptions();
 
   const listener = new EventSubHttpListener({ adapter, apiClient, secret: useEnv('hmacSecret') });
